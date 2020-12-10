@@ -10,6 +10,93 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employeeList = [];
+
+// Ask for manager info
+function askUserForManagerInfo() {
+
+    return inquirer.prompt([
+        {
+            name: "name",
+            message: "name",
+            type: "input"
+        }
+    ]).then(( managerData ) => {
+
+        const newManager = new Manager( managerData.name, managerData.id, managerData.email );
+
+        employeeList.push( newManager );
+
+    });
+
+}
+
+// Ask user for next employee type
+function askUserForEmployeeType() {
+
+    return inquirer.prompt([
+        {
+            name: "employee type",
+            message: "name",
+            type: "list"
+            choices: ['Engineer', 'Intern']
+        }
+    ]).then(( newEmployeeChoiceData ) => {
+
+        // if selects new engineer, function askUserForEngineerInfo
+        if ( "Engineer" ) {
+            askUserForEngineerInfo()
+        } if ( "Intern" ) {
+            // else if the user selects new intern, function askUserforInternInfo
+            askUserForInternInfo()
+        } else {
+            // else push htmlRenderer.js file
+            createHtmlFile();
+        };
+
+
+    });
+
+}
+
+// Ask user for engineer info
+function askUserForEngineerInfo() {
+
+    return inquirer.prompt([
+        {
+            name: "name",
+            message: "name",
+            type: "input"
+        }
+    ]).then(( engineerData ) => {
+
+    });
+
+}
+
+// Ask user for intern info
+function askUserForInternInfo() {
+
+    return inquirer.prompt([
+        {
+            name: "name",
+            message: "name",
+            type: "input"
+        }
+    ]).then(( internData ) => {
+
+    });
+
+}
+
+
+function createHtmlFile() {
+    const htmlContent = render( employeeList );
+    // Use the FS module to create the output file.
+};
+
+askUserForManagerInfo();
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
