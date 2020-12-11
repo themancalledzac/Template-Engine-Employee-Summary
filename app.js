@@ -58,26 +58,28 @@ function askUserForEmployeeType() {
 
     return inquirer.prompt([
         {
-            name: "Employee Type",
+            name: "continue",
             message: "Please choose an employment type.",
             type: "list",
             choices: ['Engineer', 'Intern', 'No more employees needed.'],
             default: 'No more employees needed.'
         }
-    ]).then((  ) => {
+    ]).then(( newEmployeeChoiceData ) => {
 
         // if selects new engineer, function askUserForEngineerInfo
-        if ( 'Engineer' ) {
-            askUserForEngineerInfo();
+        if ( newEmployeeChoiceData.continue === 'Engineer' ) {
+            console.log(newEmployeeChoiceData);
+            askUserForEngineerInfo() 
         }
-        else if ( 'Intern' ) {
+        else if ( newEmployeeChoiceData.continue === 'Intern' ) {
             // else if the user selects new intern, function askUserforInternInfo
-            askUserForInternInfo();
+            console.log(newEmployeeChoiceData);
+            askUserForInternInfo()
         } 
-        else {
+        else if (newEmployeeChoiceData.continue === 'No more employees needed.' ) {
             // else push htmlRenderer.js file
-            // console.log(newEmployeeChoiceData);
-            createHtmlFile();
+            console.log(newEmployeeChoiceData);
+            createHtmlFile()
         };
         // console.log(newEmployeeChoiceData);
     });
@@ -85,7 +87,7 @@ function askUserForEmployeeType() {
 };
 
 // Ask user for engineer info
-function askUserForEngineerInfo(data ) {
+function askUserForEngineerInfo() {
 
     return inquirer.prompt([
         {
@@ -111,7 +113,11 @@ function askUserForEngineerInfo(data ) {
 
     ]).then(( engineerData ) => {
 
-        const newEngineer = new Engineer( engineerData.name, engineerData.id, engineerData.email, engineerData.github );
+        const newEngineer = new Engineer( 
+            engineerData.name, 
+            engineerData.id, 
+            engineerData.email, 
+            engineerData.github );
 
         employeeList.push( newEngineer );
         askUserForEmployeeType();
@@ -146,7 +152,11 @@ function askUserForInternInfo() {
         }
     ]).then(( internData ) => {
 
-        const newIntern = new Engineer( internData.name, internData.id, internData.email, internData.github );
+        const newIntern = new Intern( 
+            internData.name, 
+            internData.id, 
+            internData.email, 
+            internData.github );
 
         employeeList.push( newIntern );
         askUserForEmployeeType();
