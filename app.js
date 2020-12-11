@@ -18,7 +18,7 @@ function askUserForManagerInfo() {
     return inquirer.prompt([
         {
             name: "name",
-            message: "name",
+            message: "Please input full name.",
             type: "input"
         },
         {
@@ -38,9 +38,15 @@ function askUserForManagerInfo() {
         }
     ]).then(( managerData ) => {
 
-        const newManager = new Manager( managerData.name, managerData.id, managerData.email );
+        const newManager = new Manager( 
+            managerData.name, 
+            managerData.id, 
+            managerData.email, 
+            managerData.officeNumber 
+            );
 
         employeeList.push( newManager );
+        // console.log(employeeList);
         askUserForEmployeeType();
 
     });
@@ -55,38 +61,60 @@ function askUserForEmployeeType() {
             name: "Employee Type",
             message: "Please choose an employment type.",
             type: "list",
-            choices: ['Engineer', 'Intern', 'No more employees needed'],
-            default: 'No more employees needed'
+            choices: ['Engineer', 'Intern', 'No more employees needed.'],
+            default: 'No more employees needed.'
         }
-    ]).then(( newEmployeeChoiceData ) => {
+    ]).then((  ) => {
 
         // if selects new engineer, function askUserForEngineerInfo
-        if ( "Engineer" ) {
-            askUserForEngineerInfo()
-        } if ( "Intern" ) {
+        if ( 'Engineer' ) {
+            askUserForEngineerInfo();
+        }
+        else if ( 'Intern' ) {
             // else if the user selects new intern, function askUserforInternInfo
-            askUserForInternInfo()
-        } else {
+            askUserForInternInfo();
+        } 
+        else {
             // else push htmlRenderer.js file
-            createHtmlFile( newEmployeeChoiceData );
+            // console.log(newEmployeeChoiceData);
+            createHtmlFile();
         };
-
-
-
+        // console.log(newEmployeeChoiceData);
     });
 
-}
+};
 
 // Ask user for engineer info
-function askUserForEngineerInfo() {
+function askUserForEngineerInfo(data ) {
 
     return inquirer.prompt([
         {
             name: "name",
-            message: "name",
+            message: "Please input full name.",
+            type: "input"
+        },
+        {
+            name: "id",
+            message: "What is your employee ID?",
+            type: "input"
+        },
+        {
+            name: "email",
+            message: "Please input your work email address.",
+            type: "input"
+        },
+        {
+            name: "github",
+            message: "Please input your github username",
             type: "input"
         }
+
     ]).then(( engineerData ) => {
+
+        const newEngineer = new Engineer( engineerData.name, engineerData.id, engineerData.email, engineerData.github );
+
+        employeeList.push( newEngineer );
+        askUserForEmployeeType();
 
     });
 
@@ -98,10 +126,30 @@ function askUserForInternInfo() {
     return inquirer.prompt([
         {
             name: "name",
-            message: "name",
+            message: "Please input full name.",
+            type: "input"
+        },
+        {
+            name: "id",
+            message: "What is your employee ID?",
+            type: "input"
+        },
+        {
+            name: "email",
+            message: "Please input your work email address.",
+            type: "input"
+        },
+        {
+            name: "school",
+            message: "Please input the name of the school you are currently enrolled in.",
             type: "input"
         }
     ]).then(( internData ) => {
+
+        const newIntern = new Engineer( internData.name, internData.id, internData.email, internData.github );
+
+        employeeList.push( newIntern );
+        askUserForEmployeeType();
 
     });
 
@@ -110,7 +158,13 @@ function askUserForInternInfo() {
 
 function createHtmlFile() {
     const htmlContent = render( employeeList );
+
     // Use the FS module to create the output file.
+    fs.writeFile(outputPath, htmlContent, (err) => {
+        if (err) throw err;
+
+        console.log(employeeList);
+    })
 };
 
 askUserForManagerInfo();
