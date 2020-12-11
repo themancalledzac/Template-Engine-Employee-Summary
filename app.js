@@ -20,12 +20,28 @@ function askUserForManagerInfo() {
             name: "name",
             message: "name",
             type: "input"
+        },
+        {
+            name: "id",
+            message: "What is your employee ID?",
+            type: "input"
+        },
+        {
+            name: "email",
+            message: "Please input your work email address.",
+            type: "input"
+        },
+        {
+            name: "officeNumber",
+            message: "Please input your Office Number",
+            type: "input"
         }
     ]).then(( managerData ) => {
 
         const newManager = new Manager( managerData.name, managerData.id, managerData.email );
 
         employeeList.push( newManager );
+        askUserForEmployeeType();
 
     });
 
@@ -36,10 +52,11 @@ function askUserForEmployeeType() {
 
     return inquirer.prompt([
         {
-            name: "employee type",
-            message: "name",
-            type: "list"
-            choices: ['Engineer', 'Intern']
+            name: "Employee Type",
+            message: "Please choose an employment type.",
+            type: "list",
+            choices: ['Engineer', 'Intern', 'No more employees needed'],
+            default: 'No more employees needed'
         }
     ]).then(( newEmployeeChoiceData ) => {
 
@@ -51,8 +68,9 @@ function askUserForEmployeeType() {
             askUserForInternInfo()
         } else {
             // else push htmlRenderer.js file
-            createHtmlFile();
+            createHtmlFile( newEmployeeChoiceData );
         };
+
 
 
     });
