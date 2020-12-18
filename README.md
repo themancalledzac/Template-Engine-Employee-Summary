@@ -49,9 +49,7 @@ so that I have quick access to emails and GitHub profiles
 
 ## Video
 
-```
-[video](assets/main.html - Template-Engine-Employee-Summary - Visual Studio Code 2020-12-18 12-26-41.mp4)
-```
+[Video showing generator](https://youtu.be/zYhrJ_lkuas)
 
 ## Installation
 
@@ -72,22 +70,34 @@ node index.js
 ## Code
 
 ```
-index.js file
+Employee.js file
 ```
 
-![index.js file](./assets/images/hw09_01.PNG)
+![Employee.js file](./assets/hw11.employee.PNG)
 
 ```
-template.js file
+Manager.js file
 ```
 
-![template.js file](./assets/images/hw09_02.PNG)
+![Manager.js file](./assets/hw11.manager.PNG)
 
 ```
-prompt.js file
+Engineer.js file
 ```
 
-![prompt.js file](./assets/images/hw09_03.PNG)
+![Engiineer.js file](./assets/hw11.engineer.PNG)
+
+```
+Intern.js file
+```
+
+![Intern.js file](./assets/hw11.intern.PNG)
+
+```
+htmlRenderer.js file
+```
+
+![htmlRenderer.js file](./assets/hw11.htmlrenderer.PNG)
 
 ## Questions
 
