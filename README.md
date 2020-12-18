@@ -97,7 +97,7 @@ Intern.js file
 htmlRenderer.js file
 ```
 
-![htmlRenderer.js file](./assets/hw11.htmlrenderer.PNG)
+![htmlRenderer.js file](./assets/hw11.htmlRenderer.PNG)
 
 ## Questions
 
