@@ -156,7 +156,7 @@ function askUserForInternInfo() {
             internData.name, 
             internData.id, 
             internData.email, 
-            internData.github );
+            internData.school );
 
         employeeList.push( newIntern );
         askUserForEmployeeType();
